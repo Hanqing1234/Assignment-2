@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DisplayResumePage = exports.DisplayContactPage = exports.DisplayServicesPage = exports.DisplayProjectsPage = exports.DisplayAboutPage = exports.DisplayHomePage = void 0;
+exports.DisplayListPage = exports.DisplayResumePage = exports.DisplayContactPage = exports.DisplayServicesPage = exports.DisplayProjectsPage = exports.DisplayAboutPage = exports.DisplayHomePage = void 0;
 const fs_1 = __importDefault(require("fs"));
+const contacts_1 = __importDefault(require("../Models/contacts"));
 function DisplayHomePage(req, res, next) {
     res.render('index', { title: 'Home', page: 'home' });
 }
@@ -33,4 +34,15 @@ function DisplayResumePage(req, res, next) {
     });
 }
 exports.DisplayResumePage = DisplayResumePage;
+function DisplayListPage(req, res, next) {
+    contacts_1.default.find((err, contactCollection) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection });
+        console.log(contactCollection);
+    });
+}
+exports.DisplayListPage = DisplayListPage;
 //# sourceMappingURL=index.js.map

@@ -1,5 +1,8 @@
+import { error } from 'console';
 import express, {Request, Response, NextFunction} from 'express';
 import fs from 'fs';
+
+import ContactList from '../Models/contacts';
 
 export function DisplayHomePage(req: Request, res: Response, next: NextFunction)
 {
@@ -34,3 +37,23 @@ export function DisplayResumePage(req: Request, res: Response, next: NextFunctio
     res.send(data);
   });
 }
+
+export function DisplayListPage(req: Request, res: Response, next: NextFunction)
+{
+    //db.list.find()
+    ContactList.find((err, contactCollection) =>
+    {
+        if(err)
+        {
+            console.error(err);
+            res.end(err);
+        }
+
+        res.render('index', {title: 'Contacts List', page: 'contacts-list', list: contactCollection });
+
+        console.log(contactCollection);
+        
+    });
+}
+
+
