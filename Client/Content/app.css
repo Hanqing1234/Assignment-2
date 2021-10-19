@@ -14,24 +14,28 @@ body{
     
 }
 
-.container-fluid{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+.homepage{
+    padding: 56px 24px 48px;
+    position: relative;
+    font-size: 2vw;
+    font-weight: bold;
+    margin-top: 2vh;
 }
 
 .intro {
     padding-top: 7vh;
     height: 80vh;
-    margin-left: 18vh;
 }
 
 
-.content {  
+/* .content {  
     padding: 56px 24px 48px;
     position: relative;
     font-size: 2.1vw;
     font-weight: bold;
     margin-top: 25px;   
-}
+} */
 
 /* Using CSS for a fade-in effect on page load */
 /* cited from https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load*/

@@ -18,7 +18,6 @@
 #contactForm{
     margin-top: -80px;
     height: 500px;
-    margin-left:12vw;
     width: 30vw;
 }
 
@@ -61,7 +60,6 @@
 #errorMessage{
     margin-bottom: 80px;    
     width: 30vw;
-    margin-left:12vw;
     margin-top: -100px;
 }
 .error{
