@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DisplayListPage = exports.DisplayResumePage = exports.DisplayContactPage = exports.DisplayServicesPage = exports.DisplayProjectsPage = exports.DisplayAboutPage = exports.DisplayHomePage = void 0;
+exports.DisplayLoginPage = exports.DisplayListPage = exports.DisplayResumePage = exports.DisplayContactPage = exports.DisplayServicesPage = exports.DisplayProjectsPage = exports.DisplayAboutPage = exports.DisplayHomePage = void 0;
 const fs_1 = __importDefault(require("fs"));
 const contacts_1 = __importDefault(require("../Models/contacts"));
 function DisplayHomePage(req, res, next) {
@@ -45,4 +45,8 @@ function DisplayListPage(req, res, next) {
     });
 }
 exports.DisplayListPage = DisplayListPage;
+function DisplayLoginPage(req, res, next) {
+    res.render('index', { title: 'Login', page: 'login' });
+}
+exports.DisplayLoginPage = DisplayLoginPage;
 //# sourceMappingURL=index.js.map

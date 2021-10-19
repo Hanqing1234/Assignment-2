@@ -55,4 +55,8 @@ export function DisplayListPage(req: Request, res: Response, next: NextFunction)
     });
 }
 
+export function DisplayLoginPage(req: Request, res: Response, next: NextFunction)
+{
+    res.render('index', { title: 'Login', page: 'login' });
+}
 

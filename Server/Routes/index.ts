@@ -9,7 +9,8 @@ export default router;
 
 //instantiate an object of type index controller
 import {DisplayHomePage, DisplayAboutPage, DisplayProjectsPage,
-DisplayResumePage, DisplayContactPage, DisplayServicesPage, DisplayListPage } from '../Controllers/index';
+DisplayResumePage, DisplayContactPage, DisplayServicesPage, DisplayListPage,
+DisplayLoginPage } from '../Controllers/index';
 
 /* GET home page. */
 router.get('/', DisplayHomePage);
@@ -34,5 +35,8 @@ router.get('/contact', DisplayContactPage);
 
 /* GET contact list page. */
 router.get('/contacts-list', DisplayListPage);
+
+/* GET login page. */
+router.get('/login', DisplayLoginPage);
 
 //module.exports = router;
