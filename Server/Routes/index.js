@@ -16,4 +16,5 @@ router.get('/services', index_1.DisplayServicesPage);
 router.get('/contact', index_1.DisplayContactPage);
 router.get('/contacts-list', index_1.DisplayListPage);
 router.get('/login', index_1.DisplayLoginPage);
+router.get('/register', index_1.DisplayRegisterPage);
 //# sourceMappingURL=index.js.map

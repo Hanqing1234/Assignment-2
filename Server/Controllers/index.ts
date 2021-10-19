@@ -60,3 +60,8 @@ export function DisplayLoginPage(req: Request, res: Response, next: NextFunction
     res.render('index', { title: 'Login', page: 'login' });
 }
 
+export function DisplayRegisterPage(req: Request, res: Response, next: NextFunction)
+{
+    res.render('index', { title: 'Register', page: 'register' });
+}
+
