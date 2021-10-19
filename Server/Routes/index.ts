@@ -1,7 +1,7 @@
 /*
-* Author       : Hanqing Liu
-* Date         : Sep 20, 2021
-*Description   : Assignment 1 for COMP229
+* Author         : Hanqing Liu
+* Date           : Oct 20, 2021
+* Description    : Assignment 2 for COMP229
 */
 import express from 'express';
 const router = express.Router();
@@ -32,7 +32,7 @@ router.get('/services', DisplayServicesPage);
 /* GET contact page. */
 router.get('/contact', DisplayContactPage);
 
-/* GET contact page. */
+/* GET contact list page. */
 router.get('/contact-list', DisplayListPage);
 
 //module.exports = router;

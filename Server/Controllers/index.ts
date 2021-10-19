@@ -1,4 +1,3 @@
-import { error } from 'console';
 import express, {Request, Response, NextFunction} from 'express';
 import fs from 'fs';
 

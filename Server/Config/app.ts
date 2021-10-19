@@ -1,7 +1,7 @@
 /*
 * Author       : Hanqing Liu
-* Date         : Sep 20, 2021
-*Description   : Assignment 1 for COMP229
+* Date         : Oct 20, 2021
+*Description   : Assignment 2 for COMP229
 */
 
 import createError from 'http-errors';
