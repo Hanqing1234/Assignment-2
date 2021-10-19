@@ -18,7 +18,9 @@ export default app; //export app as the default object for this module
 
 //DB Configuration
 import * as DBConfig from './db';
-mongoose.connect(DBConfig.RemoteURI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+const newLocal = (DBConfig.RemoteURI) ? DBConfig.RemoteURI : DBConfig.LocalURI;
+mongoose.connect(newLocal);
 
 const db = mongoose.connection; //alias for the mongoose connection
 db.on("error", () =>

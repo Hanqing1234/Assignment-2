@@ -32,7 +32,8 @@ const index_1 = __importDefault(require("../../Server/Routes/index"));
 const app = (0, express_1.default)();
 exports.default = app;
 const DBConfig = __importStar(require("./db"));
-mongoose_1.default.connect(DBConfig.RemoteURI, { useNewUrlParser: true, useUnifiedTopology: true });
+const newLocal = (DBConfig.RemoteURI) ? DBConfig.RemoteURI : DBConfig.LocalURI;
+mongoose_1.default.connect(newLocal);
 const db = mongoose_1.default.connection;
 db.on("error", () => {
     console.error("Connection Error");

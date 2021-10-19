@@ -33,6 +33,6 @@ router.get('/services', DisplayServicesPage);
 router.get('/contact', DisplayContactPage);
 
 /* GET contact list page. */
-router.get('/contact-list', DisplayListPage);
+router.get('/contacts-list', DisplayListPage);
 
 //module.exports = router;

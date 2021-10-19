@@ -14,5 +14,5 @@ router.get('/resume', index_1.DisplayResumePage);
 router.get('/projects', index_1.DisplayProjectsPage);
 router.get('/services', index_1.DisplayServicesPage);
 router.get('/contact', index_1.DisplayContactPage);
-router.get('/contact-list', index_1.DisplayListPage);
+router.get('/contacts-list', index_1.DisplayListPage);
 //# sourceMappingURL=index.js.map
