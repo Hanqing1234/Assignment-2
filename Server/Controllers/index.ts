@@ -143,7 +143,7 @@ export function ProcessRegisterPage(req: Request, res: Response, next: NextFunct
 
 export function ProcessLogoutPage(req: Request, res: Response, next: NextFunction): void
 {
-    req.logOut();
+    req.logout();
 
     res.redirect('/login');
 }

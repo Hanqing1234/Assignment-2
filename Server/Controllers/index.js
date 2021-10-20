@@ -100,7 +100,7 @@ function ProcessRegisterPage(req, res, next) {
 }
 exports.ProcessRegisterPage = ProcessRegisterPage;
 function ProcessLogoutPage(req, res, next) {
-    req.logOut();
+    req.logout();
     res.redirect('/login');
 }
 exports.ProcessLogoutPage = ProcessLogoutPage;

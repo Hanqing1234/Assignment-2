@@ -58,8 +58,18 @@
              href="/contact"><i class="fas fa-phone fa-lg"></i> Contact</a>
           </li>
 
+          <% if (displayName) { %>           
+            <li class="nav-item">         
+              <% if (title == "Logout"){ %>
+                <a class="nav-link active"
+              <% } else { %>
+                <a class="nav-link"
+              <% } %>
+               href="/logout"><i class="fas fa-sign-out-alt fa-lg"></i> Logout</a>   
+          </li>
+          <% } else { %>
+
           <li class="nav-item">
-            
             <% if (title == "Login"){ %>
               <a class="nav-link active"
             <% } else { %>
@@ -67,6 +77,8 @@
             <% } %>
              href="/login"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
           </li>
+          <% } %>
+          
         </ul>
       </div>
     </div>
