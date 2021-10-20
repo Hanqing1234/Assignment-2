@@ -104,8 +104,7 @@ function DisplayListPage(req, res, next) {
             res.end(err);
         }
         res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: (0, Util_1.UserDisplayName)(req) });
-        console.log(contactCollection);
-    });
+    }).sort({ name: '1' });
 }
 exports.DisplayListPage = DisplayListPage;
 function DisplayUpdatePage(req, res, next) {

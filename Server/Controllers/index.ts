@@ -148,13 +148,10 @@ export function DisplayListPage(req: Request, res: Response, next: NextFunction)
         {
             console.error(err);
             res.end(err);
-        }
+        } 
 
-        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: UserDisplayName(req) });
-
-        console.log(contactCollection);
-        
-    });
+        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: UserDisplayName(req) });      
+    }).sort({name:'1'});
 }
 
 //Display Update Page
