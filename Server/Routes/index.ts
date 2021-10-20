@@ -10,7 +10,8 @@ export default router;
 //instantiate an object of type index controller
 import {DisplayHomePage, DisplayAboutPage, DisplayProjectsPage,
 DisplayResumePage, DisplayContactPage, DisplayServicesPage, DisplayListPage,
-DisplayLoginPage, DisplayRegisterPage } from '../Controllers/index';
+DisplayLoginPage, DisplayRegisterPage, ProcessLogoutPage, ProcessLoginPage, 
+ProcessRegisterPage } from '../Controllers/index';
 
 /* GET home page. */
 router.get('/', DisplayHomePage);
@@ -36,10 +37,20 @@ router.get('/contact', DisplayContactPage);
 /* GET contact list page. */
 router.get('/contacts-list', DisplayListPage);
 
-/* GET login page. */
+/* GET display login page. */
 router.get('/login', DisplayLoginPage);
 
-/* GET register page. */
+/* Post process login page */
+router.post('/login', ProcessLoginPage);
+
+/* GET display register page. */
 router.get('/register', DisplayRegisterPage);
+
+/* Post process login page */
+router.post('/register', ProcessRegisterPage);
+
+/*Get logout page */
+router.get('/logout', ProcessLogoutPage);
+
 
 //module.exports = router;
