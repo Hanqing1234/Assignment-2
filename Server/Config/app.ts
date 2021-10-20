@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 //add support for cors object
 app.use(cors());
 
-//setup express seesion
+//setup express session
 app.use(session({
   secret: DBConfig.Secret,
   saveUninitialized: false,

@@ -49,7 +49,10 @@ function DisplayListPage(req, res, next) {
 }
 exports.DisplayListPage = DisplayListPage;
 function DisplayLoginPage(req, res, next) {
-    res.render('index', { title: 'Login', page: 'login', displayName: (0, Util_1.UserDisplayName)(req) });
+    if (!req.user) {
+        return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
+    }
+    return res.redirect('/contacts-list');
 }
 exports.DisplayLoginPage = DisplayLoginPage;
 function ProcessLoginPage(req, res, next) {
@@ -74,7 +77,7 @@ function ProcessLoginPage(req, res, next) {
 exports.ProcessLoginPage = ProcessLoginPage;
 function DisplayRegisterPage(req, res, next) {
     if (!req.user) {
-        res.render('index', { title: 'Register', page: 'register', displayName: (0, Util_1.UserDisplayName)(req) });
+        return res.render('index', { title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
     }
     return res.redirect('/contacts-list');
 }

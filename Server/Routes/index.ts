@@ -13,6 +13,8 @@ DisplayResumePage, DisplayContactPage, DisplayServicesPage, DisplayListPage,
 DisplayLoginPage, DisplayRegisterPage, ProcessLogoutPage, ProcessLoginPage, 
 ProcessRegisterPage } from '../Controllers/index';
 
+import { AuthGuard } from '../Util/index';
+
 /* GET home page. */
 router.get('/', DisplayHomePage);
 
@@ -35,7 +37,7 @@ router.get('/services', DisplayServicesPage);
 router.get('/contact', DisplayContactPage);
 
 /* GET contact list page. */
-router.get('/contacts-list', DisplayListPage);
+router.get('/contacts-list', AuthGuard, DisplayListPage);
 
 /* GET display login page. */
 router.get('/login', DisplayLoginPage);

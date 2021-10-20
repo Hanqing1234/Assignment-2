@@ -12,32 +12,32 @@ import ContactList from '../Models/contacts';
 //import Util Functions
 import { UserDisplayName } from '../Util';
 
-export function DisplayHomePage(req: Request, res: Response, next: NextFunction)
+export function DisplayHomePage(req: Request, res: Response, next: NextFunction): void
 {
     res.render('index', { title: 'Home', page: 'home', displayName: UserDisplayName(req) });
 }
 
-export function DisplayAboutPage(req: Request, res: Response, next: NextFunction)
+export function DisplayAboutPage(req: Request, res: Response, next: NextFunction): void
 {
     res.render('index', { title: 'About', page: 'about', displayName: UserDisplayName(req) });
 }
 
-export function DisplayProjectsPage(req: Request, res: Response, next: NextFunction)
+export function DisplayProjectsPage(req: Request, res: Response, next: NextFunction): void
 {
     res.render('index', { title: 'Projects', page: 'projects', displayName: UserDisplayName(req) });
 }
 
-export function DisplayServicesPage(req: Request, res: Response, next: NextFunction)
+export function DisplayServicesPage(req: Request, res: Response, next: NextFunction): void
 {
     res.render('index', { title: 'Services', page: 'services', displayName: UserDisplayName(req) });
 }
 
-export function DisplayContactPage(req: Request, res: Response, next: NextFunction)
+export function DisplayContactPage(req: Request, res: Response, next: NextFunction): void
 {
     res.render('index', { title: 'Contact Me', page: 'contact', displayName: UserDisplayName(req) });
 }
 
-export function DisplayResumePage(req: Request, res: Response, next: NextFunction)
+export function DisplayResumePage(req: Request, res: Response, next: NextFunction): void
 {
     let filePath = 'Client/Assets/pdf/Resume.pdf';
     fs.readFile(filePath, function (err,data){
@@ -46,7 +46,7 @@ export function DisplayResumePage(req: Request, res: Response, next: NextFunctio
   });
 }
 
-export function DisplayListPage(req: Request, res: Response, next: NextFunction)
+export function DisplayListPage(req: Request, res: Response, next: NextFunction): void
 {
     //db.list.find()
     ContactList.find((err, contactCollection) =>
@@ -57,7 +57,7 @@ export function DisplayListPage(req: Request, res: Response, next: NextFunction)
             res.end(err);
         }
 
-        res.render('index', {title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: UserDisplayName(req) });
+        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: UserDisplayName(req) });
 
         console.log(contactCollection);
         
@@ -67,7 +67,12 @@ export function DisplayListPage(req: Request, res: Response, next: NextFunction)
 /*functions for authentication */
 export function DisplayLoginPage(req: Request, res: Response, next: NextFunction): void
 {
-    res.render('index', { title: 'Login', page: 'login', displayName: UserDisplayName(req) });
+    if(!req.user)
+    {
+        return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: UserDisplayName(req) });
+    }
+
+    return res.redirect('/contacts-list');
 }
 
 export function ProcessLoginPage(req: Request, res: Response, next: NextFunction): void
@@ -96,7 +101,6 @@ export function ProcessLoginPage(req: Request, res: Response, next: NextFunction
                 console.error(err);
                 return next(err);
             }
-
             return res.redirect('/contacts-list');
         });
     })(req, res, next);
@@ -106,7 +110,7 @@ export function DisplayRegisterPage(req: Request, res: Response, next: NextFunct
 {
     if(!req.user)
     {
-        res.render('index', { title: 'Register', page: 'register', displayName: UserDisplayName(req) });
+        return res.render('index', { title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: UserDisplayName(req) });
     }
 
     return res.redirect('/contacts-list');
