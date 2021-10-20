@@ -8,24 +8,25 @@ const fs_1 = __importDefault(require("fs"));
 const passport_1 = __importDefault(require("passport"));
 const user_1 = __importDefault(require("../Models/user"));
 const contacts_1 = __importDefault(require("../Models/contacts"));
+const Util_1 = require("../Util");
 function DisplayHomePage(req, res, next) {
-    res.render('index', { title: 'Home', page: 'home' });
+    res.render('index', { title: 'Home', page: 'home', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayHomePage = DisplayHomePage;
 function DisplayAboutPage(req, res, next) {
-    res.render('index', { title: 'About', page: 'about' });
+    res.render('index', { title: 'About', page: 'about', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayAboutPage = DisplayAboutPage;
 function DisplayProjectsPage(req, res, next) {
-    res.render('index', { title: 'Projects', page: 'projects' });
+    res.render('index', { title: 'Projects', page: 'projects', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayProjectsPage = DisplayProjectsPage;
 function DisplayServicesPage(req, res, next) {
-    res.render('index', { title: 'Services', page: 'services' });
+    res.render('index', { title: 'Services', page: 'services', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayServicesPage = DisplayServicesPage;
 function DisplayContactPage(req, res, next) {
-    res.render('index', { title: 'Contact Me', page: 'contact' });
+    res.render('index', { title: 'Contact Me', page: 'contact', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayContactPage = DisplayContactPage;
 function DisplayResumePage(req, res, next) {
@@ -42,13 +43,13 @@ function DisplayListPage(req, res, next) {
             console.error(err);
             res.end(err);
         }
-        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection });
+        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: (0, Util_1.UserDisplayName)(req) });
         console.log(contactCollection);
     });
 }
 exports.DisplayListPage = DisplayListPage;
 function DisplayLoginPage(req, res, next) {
-    res.render('index', { title: 'Login', page: 'login' });
+    res.render('index', { title: 'Login', page: 'login', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayLoginPage = DisplayLoginPage;
 function ProcessLoginPage(req, res, next) {
@@ -73,7 +74,7 @@ function ProcessLoginPage(req, res, next) {
 exports.ProcessLoginPage = ProcessLoginPage;
 function DisplayRegisterPage(req, res, next) {
     if (!req.user) {
-        res.render('index', { title: 'Register', page: 'register' });
+        res.render('index', { title: 'Register', page: 'register', displayName: (0, Util_1.UserDisplayName)(req) });
     }
     return res.redirect('/contacts-list');
 }
