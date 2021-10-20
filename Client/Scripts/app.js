@@ -61,6 +61,14 @@
         }
         return false;
     }
+    function confirmDelete() {
+        $("a.delete").on("click", function (event) {
+            if (!confirm("Are you sure?")) {
+                event.preventDefault();
+                location.href = '/contacts-list';
+            }
+        });
+    }
     function Start() {
         let formValidated = validateForm();
         if (formValidated) {
@@ -70,6 +78,7 @@
             console.warn("form not validated - does not exist");
         }
     }
+    confirmDelete();
     window.addEventListener("load", Start);
 })();
 //# sourceMappingURL=app.js.map

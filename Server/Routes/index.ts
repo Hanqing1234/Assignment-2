@@ -11,7 +11,8 @@ export default router;
 import {DisplayHomePage, DisplayAboutPage, DisplayProjectsPage,
 DisplayResumePage, DisplayContactPage, DisplayServicesPage, DisplayListPage,
 DisplayLoginPage, DisplayRegisterPage, ProcessLogoutPage, ProcessLoginPage, 
-ProcessRegisterPage } from '../Controllers/index';
+ProcessRegisterPage, DisplayUpdatePage, ProcessUpdatePage,
+ProcessDeletePage, DisplayAddPage, ProcessAddPage } from '../Controllers/index';
 
 import { AuthGuard } from '../Util/index';
 
@@ -54,5 +55,19 @@ router.post('/register', ProcessRegisterPage);
 /*Get logout page */
 router.get('/logout', ProcessLogoutPage);
 
+/*GET display /contacts-list/add page */
+router.get('/add', AuthGuard, DisplayAddPage);
+
+/*POST process /contacts-list/add page */
+router.post('/add', AuthGuard, ProcessAddPage);
+
+/*GET display update/:id page - with /contacts-list/update:id */
+router.get('/update/:id', AuthGuard, DisplayUpdatePage);
+
+/*POST process /contacts-list/update/:id page */
+router.post('/update/:id', AuthGuard, ProcessUpdatePage);
+
+/*GET Process /contacts-list/delete/:id */
+router.get('/delete/:id', AuthGuard, ProcessDeletePage);
 
 //module.exports = router;

@@ -69,6 +69,7 @@ passport_1.default.use(user_1.default.createStrategy());
 passport_1.default.serializeUser(user_1.default.serializeUser());
 passport_1.default.deserializeUser(user_1.default.deserializeUser());
 app.use('/', index_1.default);
+app.use('/contacts-list', index_1.default);
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));
 });

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProcessLogoutPage = exports.ProcessRegisterPage = exports.DisplayRegisterPage = exports.ProcessLoginPage = exports.DisplayLoginPage = exports.DisplayListPage = exports.DisplayResumePage = exports.DisplayContactPage = exports.DisplayServicesPage = exports.DisplayProjectsPage = exports.DisplayAboutPage = exports.DisplayHomePage = void 0;
+exports.ProcessDeletePage = exports.ProcessAddPage = exports.DisplayAddPage = exports.ProcessUpdatePage = exports.DisplayUpdatePage = exports.DisplayListPage = exports.ProcessLogoutPage = exports.ProcessRegisterPage = exports.DisplayRegisterPage = exports.ProcessLoginPage = exports.DisplayLoginPage = exports.DisplayResumePage = exports.DisplayContactPage = exports.DisplayServicesPage = exports.DisplayProjectsPage = exports.DisplayAboutPage = exports.DisplayHomePage = void 0;
 const fs_1 = __importDefault(require("fs"));
 const passport_1 = __importDefault(require("passport"));
 const user_1 = __importDefault(require("../Models/user"));
@@ -37,17 +37,6 @@ function DisplayResumePage(req, res, next) {
     });
 }
 exports.DisplayResumePage = DisplayResumePage;
-function DisplayListPage(req, res, next) {
-    contacts_1.default.find((err, contactCollection) => {
-        if (err) {
-            console.error(err);
-            res.end(err);
-        }
-        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: (0, Util_1.UserDisplayName)(req) });
-        console.log(contactCollection);
-    });
-}
-exports.DisplayListPage = DisplayListPage;
 function DisplayLoginPage(req, res, next) {
     if (!req.user) {
         return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
@@ -108,4 +97,73 @@ function ProcessLogoutPage(req, res, next) {
     res.redirect('/login');
 }
 exports.ProcessLogoutPage = ProcessLogoutPage;
+function DisplayListPage(req, res, next) {
+    contacts_1.default.find((err, contactCollection) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: (0, Util_1.UserDisplayName)(req) });
+        console.log(contactCollection);
+    });
+}
+exports.DisplayListPage = DisplayListPage;
+function DisplayUpdatePage(req, res, next) {
+    let id = req.params.id;
+    contacts_1.default.findById(id, {}, {}, (err, contactsToUpdate) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.render('index', { title: 'Update', page: 'update', list: contactsToUpdate, displayName: (0, Util_1.UserDisplayName)(req) });
+    });
+}
+exports.DisplayUpdatePage = DisplayUpdatePage;
+function ProcessUpdatePage(req, res, next) {
+    let id = req.params.id;
+    let updatedContactList = new contacts_1.default({
+        "_id": id,
+        "name": req.body.name,
+        "number": req.body.number,
+        "address": req.body.address,
+    });
+    contacts_1.default.updateOne({ _id: id }, updatedContactList, {}, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/contacts-list');
+    });
+}
+exports.ProcessUpdatePage = ProcessUpdatePage;
+function DisplayAddPage(req, res, next) {
+    res.render('index', { title: 'Add', page: 'update', list: '', displayName: (0, Util_1.UserDisplayName)(req) });
+}
+exports.DisplayAddPage = DisplayAddPage;
+function ProcessAddPage(req, res, next) {
+    let newContact = new contacts_1.default({
+        "name": req.body.name,
+        "number": req.body.number,
+        "address": req.body.address,
+    });
+    contacts_1.default.create(newContact, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/contacts-list');
+    });
+}
+exports.ProcessAddPage = ProcessAddPage;
+function ProcessDeletePage(req, res, next) {
+    let id = req.params.id;
+    contacts_1.default.remove({ _id: id }, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/contacts-list');
+    });
+}
+exports.ProcessDeletePage = ProcessDeletePage;
 //# sourceMappingURL=index.js.map

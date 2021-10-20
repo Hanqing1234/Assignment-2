@@ -11,6 +11,7 @@ import ContactList from '../Models/contacts';
 
 //import Util Functions
 import { UserDisplayName } from '../Util';
+import { NativeError } from 'mongoose';
 
 export function DisplayHomePage(req: Request, res: Response, next: NextFunction): void
 {
@@ -44,24 +45,6 @@ export function DisplayResumePage(req: Request, res: Response, next: NextFunctio
     res.contentType("application/pdf");
     res.send(data);
   });
-}
-
-export function DisplayListPage(req: Request, res: Response, next: NextFunction): void
-{
-    //db.list.find()
-    ContactList.find((err, contactCollection) =>
-    {
-        if(err)
-        {
-            console.error(err);
-            res.end(err);
-        }
-
-        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: UserDisplayName(req) });
-
-        console.log(contactCollection);
-        
-    });
 }
 
 /*functions for authentication */
@@ -154,3 +137,118 @@ export function ProcessLogoutPage(req: Request, res: Response, next: NextFunctio
 
     res.redirect('/login');
 }
+
+//Read in CRUD
+export function DisplayListPage(req: Request, res: Response, next: NextFunction): void
+{
+    //db.list.find()
+    ContactList.find((err, contactCollection) =>
+    {
+        if(err)
+        {
+            console.error(err);
+            res.end(err);
+        }
+
+        res.render('index', { title: 'Contacts List', page: 'contacts-list', list: contactCollection, displayName: UserDisplayName(req) });
+
+        console.log(contactCollection);
+        
+    });
+}
+
+//Display Update Page
+export function DisplayUpdatePage(req: Request, res: Response, next: NextFunction): void
+{
+    let id = req.params.id;
+
+    //pass the id to the db 
+
+    //db.list.find({"_id": id})
+    ContactList.findById(id, {}, {}, (err, contactsToUpdate) =>
+    {
+        if(err)
+        {
+            console.error(err);
+            res.end(err);
+        }
+
+        //show the update view
+        res.render('index', { title: 'Update', page: 'update', list: contactsToUpdate, displayName: UserDisplayName(req)})
+    }); 
+}
+
+// Process Update page
+export function ProcessUpdatePage(req: Request, res: Response, next: NextFunction): void
+{
+    let id = req.params.id;
+
+    // instantiate a new Contact Item
+    let updatedContactList = new ContactList
+    ({
+      "_id": id,
+      "name": req.body.name,
+      "number": req.body.number,
+      "address": req.body.address,
+    });
+  
+    // find the clothing item via db.clothing.update({"_id":id}) and then update
+    ContactList.updateOne({_id: id}, updatedContactList, {}, (err) =>{
+      if(err)
+      {
+        console.error(err);
+        res.end(err);
+      }
+  
+      res.redirect('/contacts-list');
+    });
+}
+// Display Create page
+export function DisplayAddPage(req: Request, res: Response, next: NextFunction): void
+{
+    // show the Update view
+    res.render('index', { title: 'Add', page: 'update', list: '', displayName: UserDisplayName(req)  });
+}
+
+// Process Create page
+export function ProcessAddPage(req: Request, res: Response, next: NextFunction): void
+{
+    // instantiate a new Contact List
+  let newContact = new ContactList
+  ({
+    "name": req.body.name,
+    "number": req.body.number,
+    "address": req.body.address,
+  });
+
+  // db.list.insert({list data is here...})
+  ContactList.create(newContact, (err: NativeError) => 
+  {
+    if(err)
+    {
+      console.error(err);
+      res.end(err);
+    }
+
+    res.redirect('/contacts-list');
+  });
+}
+
+// Process Delete page
+export function ProcessDeletePage(req: Request, res: Response, next: NextFunction): void
+{
+    let id = req.params.id;
+
+  // db.clothing.remove({"_id: id"})
+  ContactList.remove({_id: id}, (err) => {
+    if(err)
+    {
+      console.error(err);
+      res.end(err);
+    }
+
+    res.redirect('/contacts-list');
+  });
+}
+
+

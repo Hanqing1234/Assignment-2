@@ -21,4 +21,9 @@ router.post('/login', index_1.ProcessLoginPage);
 router.get('/register', index_1.DisplayRegisterPage);
 router.post('/register', index_1.ProcessRegisterPage);
 router.get('/logout', index_1.ProcessLogoutPage);
+router.get('/add', index_2.AuthGuard, index_1.DisplayAddPage);
+router.post('/add', index_2.AuthGuard, index_1.ProcessAddPage);
+router.get('/update/:id', index_2.AuthGuard, index_1.DisplayUpdatePage);
+router.post('/update/:id', index_2.AuthGuard, index_1.ProcessUpdatePage);
+router.get('/delete/:id', index_2.AuthGuard, index_1.ProcessDeletePage);
 //# sourceMappingURL=index.js.map
